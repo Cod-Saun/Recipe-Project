@@ -9,7 +9,16 @@ body {
 	color: White;
 }
 </style>
-<body>
-	{{ body }}
+<body>	
+{{ body }}
+<ul>
+{% for item in item_list %}
+    <li> {{item}} </li>
+{% endfor %}
+</ul>
+<form action="/" method="post">
+{% csrf_token %}
+{{ form }}
+<input type="submit" value="Add Song">
 </body>
 </html>
