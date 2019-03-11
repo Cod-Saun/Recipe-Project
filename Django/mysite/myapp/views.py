@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import JsonResponse
 from . import models
 from . import forms
 
 # Create your views here.
 
 def index(request):
-    i_list=models.Playlist.objects.values_list()
+    i_list=models.Playlist.objects.all()
     i_form = forms.PlaylistForm()
 
     if request.method == "POST":
@@ -23,8 +24,16 @@ def index(request):
         i_form = forms.PlaylistForm()
 
     context = {
-        "body":"CINS 465 Hello World! Template",
+        "body":"Add Songs to the list to create a Playlist. Javascript will automatically update the playlist if something is added.",
         "item_list":i_list,
         "form":i_form
     }
     return render(request,"index.html", context=context)
+
+def  playlist_json(request):
+    i_list=models.Playlist.objects.all()
+    response_list = {}
+    response_list["Playlist"]=[]
+    for item in i_list:
+        response_list["Playlist"]+=[{"Song_Name":item.Song_Name}]
+    return JsonResponse(response_list)
