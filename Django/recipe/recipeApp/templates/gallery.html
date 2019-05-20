@@ -1,0 +1,28 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+<div id='gallery'>
+  <span v-if="seen">
+    <ul>
+-      {% for item in responselist %}
+         <li>{{ item }}
+       {% endfor %} 
+    </ul>
+  </span>
+  <span v-if="unseen">
+    <ul>
+      <li v-for="item in Recipes">
+        {% verbatim %}
+        {{ item }}
+        {% endverbatim %}
+      </li>
+    </ul>
+  </span>
+</div>
+{% endblock %}
+
+{% block scripts %} 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="{% static "gallery.js" %}"></script>
+{% endblock %}

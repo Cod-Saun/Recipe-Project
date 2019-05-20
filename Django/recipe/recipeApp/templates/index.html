@@ -1,55 +1,52 @@
 {% load static%}
 <!doctype html>
 <html class="no-js" lang="en" dir="litr">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{ title }}</title>
-<link rel="stylesheet" href="{% static "foundation/css/foundation.css" %}">
-<link rel="stylesheet" href="{% static "css/recipe.css" %}">
-{% block css %}
-{% endblock %}
-</head>
-<body>
-<div class="top-bar">
-<div class="top-bar-left">
-<ul class="dropdown menu" data-dropdown-menu>
-<li class="menu-text">{{ page }}</li>
-<!-- <li>
-<a>One</a>
-<ul class="menu vertical">
-<li><a href="#">One</a></li>
-<li><a href="#">Two</a></li>
-<li><a href="#">Three</a></li>
-</ul>
-</li> -->
-<li><a href="/recipes">Recipes</a></li>
-<li><a href="/recommendation">Recommendations Search</a><li>
-</ul>
-</div>
-<div class="top-bar-right">
-<ul class="menu">
-{% if user.is_authenticated %}
-<!-- <li><a href="/accounts/">{{ user.username }}</a></li> -->
-<!-- <li><a href="/suggestion/">Add Suggestion</a></li> -->
-<li><a href="/logout">Logout</a></li>
-{% else %}
-<!-- <li><a href="/register/">Register</a></li> -->
-<li><a href="/login">Log In</a></li>
-{% endif %}
-</ul>
-</div>
-</div>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static "foundation/css/foundation.css" %}">
+    <style>
+      {{ bgimg }}
+      {% if not bgimg %} 
+        body{background-image:url("https://i.imgur.com/lMtXdT7.jpg");}
+      {% endif %}
+      .content{display: block; background: rgba(255,255,255,0.75); width: 700px; position: relative; z-index: 1; top: 10px; text-align: center; margin: auto; border: 10px transparent;}
+    </style>
+  </head>
+  <body>
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <ul class="dropdown menu" data-dropdown-menu>
+          <li class="menu-text">{{ page }}</li>
+	  <li><a href="{{ firstURL }}">{{ firstpage }}</a></li>
+	  <li><a href="{{ secondURL }}">{{ secondpage }}</a><li>
+	  <li><a href="{{ thirdURL }}">{{ thirdpage }}</a><li>
+	  <li><a href="{{ fourthURL }}">{{ fourthpage }}</a><li>
+        </ul>
+      </div>
 
-{% block content %}
-{% endblock %}
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="{% static "js/vendor/jquery.js" %}"></script>
-<script src="{% static "js/vendor/what-input.js" %}"></script>
-<script src="{% static "js/vendor/foundation.js" %}"></script>
-<script src="{% static "js/app.js" %}"></script>
-{% block scripts %}
-{% endblock %}
-</body>
+      <div class="top-bar-right">
+        <ul class="menu">
+          {% if user.is_authenticated %}
+            <li><a href="/logout">Logout</a></li>
+          {% else %}
+	  <li><a href="/login/?next={{ loginredirect }}">Log In</a></li>
+            <li><a href="/register">Register</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+    <div class="content">
+      <h3>{{ header }}</h3>
+      {{ body }}
+    </div>
+    {% block content %}
+    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    {% block scripts %}
+    {% endblock %}
+
+  </body>
 </html>
