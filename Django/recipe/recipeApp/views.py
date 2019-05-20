@@ -33,6 +33,23 @@ def Homepage(request):
       }
   return render(request, 'index.html', context=context)
 
+def Recipe(request, recipe):
+  comtext = {
+      "title":recipe,
+      "page":recipe,
+      "firstURL":"/",
+      "secondURL":"/recommendation",
+      "thirdURL":"/submit",
+      "firstpage":"Home",
+      "secondpage":"Recommendation Search",
+      "thirdpage":"Submit A Recipe",
+      "fourthURL":"/chat",
+      "fourthpage":"Chat",
+      "loginredirect":"/gallery",
+      "bgimg":False
+      }
+  return render(request, recipe.html)
+
 def Gallery(request):
   context = {
       "title":"Gallery",
@@ -55,7 +72,7 @@ def Gallery_Json(request):
   responselist = {}
   responselist["Recipes"] = []
   for item in RecipeList:
-    responselist["Recipes"]+=[{"Recipe":[item.Title, item.SourceURL, {"Servings":item.Servings, "Calories":item.Calories, "Calories Per Serving":item.CaloriesServing}, item.Diet, item.Health, {"Ingredients":[item.Ingredient0, item.Ingredient1, item.Ingredient2, item.Ingredient3, item.Ingredient4, item.Ingredient5, item.Ingredient6, item.Ingredient7, item.Ingredient8, item.Ingredient9]}, item.Instructions]}]
+    responselist["Recipes"]+=[{"Title":item.Title, "SourceURL":item.SourceURL, "Servings":item.Servings, "Calories":item.Calories, "CaloriesServing":item.CaloriesServing, "Diet":item.Diet, "Health":item.Health, "Ingredient0":item.Ingredient0, "Ingredient1":item.Ingredient1, "Ingredient2":item.Ingredient2, "Ingredient3":item.Ingredient3, "Ingredient4":item.Ingredient4, "Ingredient5":item.Ingredient5, "Ingredient6":item.Ingredient6, "Ingredient7":item.Ingredient7, "Ingredient8":item.Ingredient8, "Ingredient9":item.Ingredient9, "Instructions":item.Instructions}]
   return JsonResponse(responselist)
 
 @login_required(login_url="/login/")
@@ -109,20 +126,20 @@ def Submit(request):
 def Recommendation(request):
   form_instance = forms.RecipeSearch
   context = {
-      "title":"Recommendation",
-      "page":"Recipe Recommendation",
-      "firstURL":"/",
-      "secondURL":"/gallery",
-      "thirdURL":"/submit",
-      "firstpage":"Home",
-      "secondpage":"Gallery",
-      "thirdpage":"Submit a Recipe",
-      "fourthURL":"/chat",
-      "fourthpage":"Chat",
-      "loginredirect":"/recommendation",
-      "form":form_instance,
-      "bgimg":False
-      }
+    "title":"Recommendation",
+    "page":"Recipe Recommendation",
+    "firstURL":"/",
+    "secondURL":"/gallery",
+    "thirdURL":"/submit",
+    "firstpage":"Home",
+    "secondpage":"Gallery",
+    "thirdpage":"Submit a Recipe",
+    "fourthURL":"/chat",
+    "fourthpage":"Chat",
+    "loginredirect":"/recommendation",
+    "form":form_instance,
+    "bgimg":False
+    }
   return render(request, 'recommendation.html', context=context)
 
 def Chat(request):

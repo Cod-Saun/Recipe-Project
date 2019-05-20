@@ -5,8 +5,8 @@
 <div id='gallery'>
   <span v-if="seen">
     <ul>
--      {% for item in responselist %}
-         <li>{{ item }}
+       {% for item in responselist %}
+       <li>{{ item }}</li>
        {% endfor %} 
     </ul>
   </span>
@@ -14,7 +14,29 @@
     <ul>
       <li v-for="item in Recipes">
         {% verbatim %}
-        {{ item }}
+	{{ item.Title }} - {{ item.Servings }} Servings
+	  <ul>
+            <li>Calories: {{ item.Calories }}</li>
+            <li>Calories per Serving: {{ item.CaloriesServing }}</li>
+            <li>Diet Type: {{ item.Diet }}</li>
+            <li>Health Requirements: {{ item.Health }}</li>
+	    <li>Ingredients:</li>
+	      <ul>
+                <li> {{ item.Ingredient0 }}</li>
+                <li> {{ item.Ingredient1 }}</li>
+                <li> {{ item.Ingredient2 }}</li>
+                <li> {{ item.Ingredient3 }}</li>
+                <li> {{ item.Ingredient4 }}</li>
+                <li> {{ item.Ingredient5 }}</li>
+                <li> {{ item.Ingredient6 }}</li>
+                <li> {{ item.Ingredient7 }}</li>
+                <li> {{ item.Ingredient8 }}</li>
+                <li> {{ item.Ingredient9 }}</li>
+	      </ul>
+            <li>Instructions: {{ item.Instructions}}</li>
+	    <li>Source: {{ item.SourceURL }}</li>
+	    <p> </p>
+          </ul>
         {% endverbatim %}
       </li>
     </ul>

@@ -1,6 +1,6 @@
 {% extends "index.html" %}
 {% block content %}
-<form action="/search/" method="post">
+<form action="/recommendation" method="post">
 {% csrf_token %}
 {{ form }}
 <input type="submit" value="Submit">
