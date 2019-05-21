@@ -14,7 +14,7 @@
     <ul>
       <li v-for="item in Recipes">
         {% verbatim %}
-	{{ item.Title }} - {{ item.Servings }} Servings
+	<h4>{{ item.Title }} - {{ item.Servings }} Servings</h4>
 	  <ul>
             <li>Calories: {{ item.Calories }}</li>
             <li>Calories per Serving: {{ item.CaloriesServing }}</li>

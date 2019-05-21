@@ -1,0 +1,33 @@
+<!-- Adapted from https://stackoverflow.com/questions/14225601/django-form-to-query-database-models -->
+{% extends "index.html" %}
+{% block content %}
+{% for result in results %}
+<h4>{{ result.Title }}, {{ result.Servings }} Servings</h4>
+<ul>
+	<li>Calories: {{ result.Calories }}</li>
+	<li>Calories per Serving: {{ result.CaloriesServing }}</li>
+	<li>Diet Type: {{ result.Diet }}</li>
+	<li>Health Requirements: {{ result.Health }}</li>
+	<li>Ingredients:</li>
+	<ul>
+		<li> {{ result.Ingredient0 }}</li>
+		<li> {{ result.Ingredient1 }}</li>
+		<li> {{ result.Ingredient2 }}</li>
+		<li> {{ result.Ingredient3 }}</li>
+		<li> {{ result.Ingredient4 }}</li>
+		<li> {{ result.Ingredient5 }}</li>
+		<li> {{ result.Ingredient6 }}</li>
+		<li> {{ result.Ingredient7 }}</li>
+		<li> {{ result.Ingredient8 }}</li>
+	        <li> {{ result.Ingredient9 }}</li>
+	</ul>
+	<li>Instructions: {{ result.Instructions}}</li>
+	<li>Source: {{ result.SourceURL }}</li>
+</ul>
+	{% endfor %}
+	<form method="get" action="/search/">
+		<p> </p>
+		Search Recipes:<input type="text" name="q" id="id_q" value="{{ query }}"/>
+		<input type="submit" value="Search" />
+	</form>
+{% endblock %}

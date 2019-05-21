@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.http import HttpResponse
 from django.http import JsonResponse
+from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.utils.safestring import mark_safe
@@ -124,23 +125,41 @@ def Submit(request):
 
 @login_required(login_url="/login/")
 def Recommendation(request):
-  form_instance = forms.RecipeSearch
   context = {
-    "title":"Recommendation",
-    "page":"Recipe Recommendation",
-    "firstURL":"/",
-    "secondURL":"/gallery",
-    "thirdURL":"/submit",
-    "firstpage":"Home",
-    "secondpage":"Gallery",
-    "thirdpage":"Submit a Recipe",
-    "fourthURL":"/chat",
-    "fourthpage":"Chat",
-    "loginredirect":"/recommendation",
-    "form":form_instance,
-    "bgimg":False
+      "title":"Search",
+      "page":"Search",
+      "firstURL":"/",
+      "firstpage":"Home",
+      "secondURL":"/gallery",
+      "secondpage":"Gallery",
+      "thirdURL":"/submit",
+      "thirdpage":"Submit A Recipe",
+      "fourthURL":"/char",
+      "fourthpage":"chat",
+      "bgimg":False,
     }
-  return render(request, 'recommendation.html', context=context)
+  return render(request, 'search.html', context=context)
+
+@login_required(login_url="/login/")
+# adapted from https://stackoverflow.com/questions/14225601/django-form-to-query-database-models
+def Search(request):
+  query = request.GET.get('q')
+  results = models.Recipe.objects.filter(Title__icontains=query)
+  context = {
+      "title":"Search",
+      "page":"Search",
+      "firstURL":"/",
+      "firstpage":"Home",
+      "secondURL":"/gallery",
+      "secondpage":"Gallery",
+      "thirdURL":"/submit",
+      "thirdpage":"Submit A Recipe",
+      "fourthURL":"/char",
+      "fourthpage":"chat",
+      "bgimg":False,
+       "results":results
+   }
+  return render(request, 'results.html', context=context)
 
 def Chat(request):
   context = {

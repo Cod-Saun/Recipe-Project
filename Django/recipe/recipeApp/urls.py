@@ -13,6 +13,7 @@ urlpatterns = [
         path('logout', views.Logout),
         path('register', views.Register),
         path('recommendation', views.Recommendation),
+        path('search/', views.Search),
         path('submit/', views.Submit),
         path('chat/', views.Chat),
         path('chat/<slug:room_name>/', views.ChatRoom),

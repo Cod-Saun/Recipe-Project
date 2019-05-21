@@ -1,0 +1,8 @@
+<!-- Adapted from https://stackoverflow.com/questions/14225601/django-form-to-query-database-models -->
+{% extends "index.html" %}
+{% block content %}
+<form method="get" action="/search/">
+  Search Recipes:<input type="text" name="q" id="id_q" value="{{ query }}"/>
+  <input type="submit" value="Search" />
+</form>
+{% endblock %}
